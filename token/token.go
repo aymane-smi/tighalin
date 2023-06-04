@@ -12,7 +12,7 @@ const (
 	ILLEGAL = "ILLEGAL"
 	EOF     = "EOF"
 
-	//identufuer + literals
+	//identifier + literals
 
 	IDENT = "IDENT"
 	INT   = "INT"
