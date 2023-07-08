@@ -1,6 +1,8 @@
 package lexer
 
-import "github.com/aymane-smi/tighalin/token"
+import (
+	"github.com/aymane-smi/tighalin/token"
+)
 
 type Lexer struct {
 	input        string
@@ -55,8 +57,8 @@ func (l *Lexer) NextToken() (token.Token){
 			tok.Literal = ""
 			tok.Type = token.EOF
 		default:
-			if isLetter(l.ch){
-				tok.Literal = l.readidentifier()
+			if isValidCharVar(l.ch){
+				tok.Literal = l.readIdentifier()
 				return tok
 			}else{
 				tok = newToken(token.ILLEGAL, l.ch)
@@ -69,19 +71,43 @@ func (l *Lexer) NextToken() (token.Token){
 
 //read identifier
 
-func (l* Lexer) readidentifier() string{
+func (l* Lexer) readIdentifier() string{
 	position := l.position
-	for isLetter(l.ch){
+	for isValidCharVar(l.ch){
 		l.ReadChar()
-		return l.input[position:l.position]
 	}
+	return l.input[position:l.position]
 }
 
-//check if a char is a letter or underscore
+//check if a char is valid to be in variable name
+
+func isValidCharVar(ch byte) bool{
+	return  isLetter(ch) && isNumber(ch) && isSpecial(ch)
+}
+
+//helpers for isValidCharVar function
 
 func isLetter(ch byte) bool{
-	return ch >= 'a' && ch <= 'z' || ch >= 'A' && ch <= 'Z' || ch == '_'
+	return ch >= 'a' && ch <= 'z' || ch >= 'A' && ch <= 'Z'
 }
+
+func isNumber(ch byte) bool{
+	var tmp int = int(ch - '0')
+	return tmp >= 0 && tmp <= 9
+}
+
+func isSpecial(ch byte) bool{
+	var chars string = "_@"
+	result := false
+	for i := 0; i < len(chars); i++{
+		if chars[i] == ch{
+			result = true
+		}
+	}
+	return result
+}
+
+
 
 //get the object of the given literal
 
