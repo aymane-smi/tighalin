@@ -39,7 +39,17 @@ const (
 	CONST    = "CONST"
 )
 
+// keywords map
 var Keywords = map[string]TokenType{
 	"fn":  FUNCTION,
 	"let": LET,
+}
+
+//look if the given string is a valid keyword
+
+func LookupIdent(ident string) TokenType {
+	if tok, ok := Keywords[ident]; ok {
+		return tok
+	}
+	return IDENT
 }
