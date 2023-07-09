@@ -13,7 +13,8 @@ func testNextToken(t *testing.T){
 	let add = fn(x, y) {
 	x + y;
 	};
-	let result = add(five, ten);`
+	let result = add(five, ten);
+	!*-<5>;`
 
 	tests := []struct{
 		expectedType token.TokenType
@@ -51,6 +52,12 @@ func testNextToken(t *testing.T){
 		{token.IDENT, "five"},
 		{token.COMMA, ","},
 		{token.IDENT, "ten"},
+		{token.SEMICOLON, ";"},
+		{token.BANG, "!"},
+		{token.ASTRISK, "*"},
+		{token.LT, "<"},
+		{token.INT, "5"},
+		{token.GT, ">"},
 		{token.SEMICOLON, ";"},
 		{token.EOF, ""},
 	}

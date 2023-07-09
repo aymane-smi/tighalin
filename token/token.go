@@ -19,8 +19,14 @@ const (
 
 	//Operators
 
-	ASSIGN = "ASSIGN"
-	PLUS   = "PLUS"
+	ASSIGN  = "+"
+	PLUS    = "+"
+	MINUS   = "-"
+	BANG    = "!"
+	ASTRISK = "*"
+	SLASH   = "/"
+	LT      = "<"
+	GT      = ">"
 
 	//Delimiters | Separators
 
