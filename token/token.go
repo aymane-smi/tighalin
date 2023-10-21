@@ -12,15 +12,23 @@ const (
 	ILLEGAL = "ILLEGAL"
 	EOF     = "EOF"
 
-	//identufuer + literals
+	//identifier + literals
 
 	IDENT = "IDENT"
 	INT   = "INT"
 
 	//Operators
 
-	ASSIGN = "ASSIGN"
-	PLUS   = "PLUS"
+	ASSIGN  = "+"
+	PLUS    = "+"
+	MINUS   = "-"
+	BANG    = "!"
+	ASTRISK = "*"
+	SLASH   = "/"
+	LT      = "<"
+	GT      = ">"
+	EQ      = "=="
+	NOT_EQ  = "!="
 
 	//Delimiters | Separators
 
@@ -37,4 +45,30 @@ const (
 	FUNCTION = "FUNCTION"
 	LET      = "LET"
 	CONST    = "CONST"
+	TRUE     = "TRUE"
+	FALSE    = "FALSE"
+	IF       = "IF"
+	ELSE     = "ELSE"
+	RETURN   = "RETURN"
 )
+
+// keywords map
+var Keywords = map[string]TokenType{
+	"fn":     FUNCTION,
+	"let":    LET,
+	"const":  CONST,
+	"if":     IF,
+	"else":   ELSE,
+	"true":   TRUE,
+	"false":  FALSE,
+	"return": RETURN,
+}
+
+//look if the given string is a valid keyword
+
+func LookupIdent(ident string) TokenType {
+	if tok, ok := Keywords[ident]; ok {
+		return tok
+	}
+	return IDENT
+}
